@@ -1,0 +1,16 @@
+service: woocommerce-sales-order-download # Replace with your service name
+plugins:
+  - serverless-plugin-typescript
+
+provider:
+  name: aws
+  runtime: nodejs14.x # Or choose your preferred Node.js runtime version
+
+functions:
+  CustomerDownload:
+    handler: app/handler.handler # Path to the compiled JavaScript handler (output of TypeScript compilation)
+    events:
+      - sqs:
+          arn: arn:aws:sqs:us-east-1:113800391227:woocommerce-sales-order-queue
+          batchSize: 1
+    timeout: 30
