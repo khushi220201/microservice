@@ -1,4 +1,4 @@
-service: woocommerce-sales-order-download # Replace with your service name
+service: woocommerce-customer-download # Replace with your service name
 plugins:
   - serverless-plugin-typescript
 
@@ -9,8 +9,7 @@ provider:
 functions:
   CustomerDownload:
     handler: app/handler.handler # Path to the compiled JavaScript handler (output of TypeScript compilation)
-    events:
-      - sqs:
-          arn: arn:aws:sqs:us-east-1:113800391227:woocommerce-sales-order-queue
-          batchSize: 1
-    timeout: 30
+    environment:
+      WOOCOMERCE_STORE_URL: "https://satvasolutions.com/woocommerce-test/"
+      CONSUMER_KEY: "ck_24554006fcfe529f3682ab4317c5431f4c6b1f38"
+      CONSUMER_SECRET: "cs_ce22d59036463ea91579bbf6e4ca054ef4c02e36"
